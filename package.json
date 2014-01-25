@@ -1,0 +1,14 @@
+{
+  "name": "neff",
+  "version": "0.0.1",
+  "description": "nconf & express based features flags",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jamund Ferguson",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "nconf": "~0.6.9"
+  }
+}

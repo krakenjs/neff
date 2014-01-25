@@ -60,7 +60,7 @@ function getEnabledFeatures() {
  * @Note this needs to be here, because nconf is not populated immediately
  */
 function getFeatures() {
-	return config.get("features");
+	return config.get("features") || {};
 }
 
 /**

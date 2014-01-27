@@ -1,6 +1,6 @@
 {
   "name": "neff",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "nconf & express based features flags",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,9 @@
   },
   "homepage": "http://github.com/xjamundx/neff",
   "author": "Jamund Ferguson",
-  "repository" : {
-	  "type" : "git",
-	  "url" : "http://github.com/xjamundx/neff.git"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/xjamundx/neff.git"
   },
   "license": "Apache 2.0",
   "dependencies": {

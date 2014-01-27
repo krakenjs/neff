@@ -4,11 +4,12 @@ define([], function() {
 	"use strict";
 
 	// grab the features off of the <body>
+	var prefix = "feature-";
 	var classes = document.body.className.split(/\s/);
 	var features = {};
 	for (var i = 0; i < classes.length; i++) {
-		if (classes[i].indexOf("feature-") === 0) {
-			features[classes[i]] = true;
+		if (classes[i].indexOf(prefix) === 0) {
+			features[classes[i].replace(prefix, "")] = true;
 		}
 	}
 

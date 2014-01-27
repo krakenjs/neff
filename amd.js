@@ -1,4 +1,5 @@
-// client version.
+// neff - feature flags
+// https://github.com/xjamundx/neff
 define([], function() {
 
 	"use strict";

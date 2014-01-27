@@ -44,6 +44,8 @@ It also provides a string of class names you can insert into your `<body>` (dust
 <body class="{featureClasses}">
 ```
 
+The output prepends `feature-` to the classname, so you might see something like `<body class="feature-feature1">` with the config above. Only enabled features show up in the string.
+
 #### Express Router Limiter
 
 
@@ -59,10 +61,10 @@ app.get("/myhidden/route", neff.limit("feature1"), function(req, res) {
 ### Client Side Usage
 
 
-Make sure your features are declared on your DOM.
+Make sure your features are declared on your DOM like so:
 
 ```
-<body class="feature-your-feature1 feature-your-feature2">
+<body class="feature-feature1 feature-feature2">
 ```
 
 Once you've done that you can take advantage of the flags in 2 ways.
@@ -77,7 +79,7 @@ Once you've done that you can take advantage of the flags in 2 ways.
 }
 
 /* Display that block when your flag is present */
-.feature-your-feature .my-cool-block {
+.feature-feature1 .my-cool-block {
 	display: block;
 }
 ```
@@ -86,7 +88,7 @@ Once you've done that you can take advantage of the flags in 2 ways.
 
 ```javascript
 define(["neff"], function(neff) {
-	if (neff.isEnabled("your-feature")) {
+	if (neff.isEnabled("feature1")) {
 		/* .. */
 	}
 });

@@ -42,13 +42,24 @@ function isEnabled(feature) {
 }
 
 /**
+ * Read the feature list and return true/false if the instance is contained.
+ * @param feature		-	feature we want to check
+ * @param instance		-	instance we want to check is in the group
+ * Ex: if (feature.isEnabledForGroup('roman-characters', 'Americans') ) {
+ */
+function isEnabledForGroup(featureGroup, instance) {
+	var featureGroupArray = getFeatures()[featureGroup];
+	return featureGroupArray.indexOf(instance) >= 0;
+}
+
+/**
  * Returns an array of enabled features with the prefix "feature-" prepended
  */
 function getEnabledFeatures() {
 	var features = getFeatures();
 	var enabled = [];
 	for (var name in features) {
-		if (features[name]) {
+		if (features[name] && typeof features[name] === "boolean") {
 			enabled.push("feature-" + name);
 		}
 	}
@@ -68,6 +79,7 @@ function getFeatures() {
  */
 module.exports = {
 	isEnabled: isEnabled,
+	isEnabledForGroup: isEnabledForGroup,
 	helpers: helpers,
 	limit: limit
 };

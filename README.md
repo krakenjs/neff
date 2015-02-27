@@ -8,11 +8,21 @@ if (moreUsers) {
 }
 ```
 
-### Server Side Usage
+
+#### Argument-Based Config
+
+To get started with neff you'll want to make sure you call neff, passing it an an object with feature names and either `true` or `false` values. 
+
+```
+app.use(neff({
+    "feature1": true,
+    "feature2": false
+}));
+```
 
 #### NConf-Based Config
 
-To get started with neff you'll want to make sure you have setup nconf to contain a `features` setting, which is an object with feature names and either `true` or `false` values. I'm currently doing this using a JSON file and my config looks like this:
+If you'd like to utilize NConf for this, you can reference an NConf JSON file and my config looks like this:
 
 ```json
 "features": {
@@ -21,12 +31,10 @@ To get started with neff you'll want to make sure you have setup nconf to contai
 }
 ```
 
-#### Express Helpers
-
-Neff provides a middleware to add feature flag information to express views. Its usage is:
+Then pass the config object for the features to neff:
 
 ```
-app.use(neff.helpers);
+app.use(neff(nconf.get('features')));
 ```
 
 The first thing it allows you to do is access feature flags directly in your template such as (dust syntax):

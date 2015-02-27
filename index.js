@@ -1,6 +1,7 @@
 "use strict";
+var _ = require("lodash");
 
-var config = require("nconf");
+var features = {};
 
 /**
  * A connect middleware to limit access to routes based on flags.
@@ -20,15 +21,15 @@ function limit(feature) {
  * Ex: app.use(feature.helpers);
  */
 function helpers(req, res, next) {
-	var features = getEnabledFeatures();
+	var enabledFeatures = getEnabledFeatures();
 
 	// make the features accessible to the view
-	features.forEach(function(feature) {
+	enabledFeatures.forEach(function(feature) {
 		res.locals[feature] = true;
 	});
 
 	// create a string of CSS that we can append them to our template
-	res.locals.featureClasses = features.join(" ");
+	res.locals.featureClasses = enabledFeatures.join(" ");
 
 	next();
 }
@@ -38,14 +39,13 @@ function helpers(req, res, next) {
  * Ex: if (feature.isEnabled("your-feature") { ... }
  */
 function isEnabled(feature) {
-	return getFeatures()[feature];
+	return features[feature];
 }
 
 /**
  * Returns an array of enabled features with the prefix "feature-" prepended
  */
 function getEnabledFeatures() {
-	var features = getFeatures();
 	var enabled = [];
 	for (var name in features) {
 		if (features[name]) {
@@ -56,19 +56,12 @@ function getEnabledFeatures() {
 }
 
 /**
- * Parse the features out of the config.
- * @Note this needs to be here, because nconf is not populated immediately
+ * Pass in a features object, returns the middleware
  */
-function getFeatures() {
-	return config.get("features") || {};
+exports = module.exports = function neff(options) {
+	features = _.extend(features, options);
+	return helpers;
 }
 
-/**
- * Export a very basic API.
- */
-module.exports = {
-	isEnabled: isEnabled,
-	helpers: helpers,
-	limit: limit
-};
-
+exports.limit = limit;
+exports.isEnabled = isEnabled;

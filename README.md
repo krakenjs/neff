@@ -20,6 +20,16 @@ To get started with neff you'll want to make sure you have setup nconf to contai
     "feature2": false
 }
 ```
+#### Argument-Based Config
+
+If you'd instead like to pass the features as parameters you can call the factory method to merge the arguments passed to the method with any (optional) nconf configuration you utilize in your project.
+
+```
+app.use(neff.factory({
+    "feature1": true,
+    "feature2": false
+}));
+```
 
 #### Express Helpers
 

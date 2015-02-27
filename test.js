@@ -20,3 +20,15 @@ neff.helpers(req, res, function() {
 	assert.ok(res.locals['feature-featureA'], "feature a should exist in locals");
 	assert.ok(!res.locals['feature-featureB'], "feature b should not exist in locals");
 });
+
+// test the factory
+var factory = neff.factory({
+	"featureA": false,
+	"featureB": true
+});
+res = {locals:{}};
+factory(req, res, function() {
+	assert.equal(res.locals.featureClasses, "feature-featureB", "we should have a correct CSS string");
+	assert.ok(res.locals['feature-featureB'], "feature b should exist in locals");
+	assert.ok(!res.locals['feature-featureA'], "feature a should not exist in locals");
+});

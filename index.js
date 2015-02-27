@@ -1,6 +1,8 @@
 "use strict";
 
-var config = require("nconf");
+var config = require("nconf"),
+	_ = require("lodash"),
+	features = {};
 
 /**
  * A connect middleware to limit access to routes based on flags.
@@ -60,7 +62,16 @@ function getEnabledFeatures() {
  * @Note this needs to be here, because nconf is not populated immediately
  */
 function getFeatures() {
-	return config.get("features") || {};
+	features = _.assign({}, config.get('features'), features);
+	return features;
+}
+
+/**
+ * Pass in an optional config to replace nconf, returns the middleware
+ */
+function factory(options) {
+	features = options || {};
+	return helpers;
 }
 
 /**
@@ -69,6 +80,7 @@ function getFeatures() {
 module.exports = {
 	isEnabled: isEnabled,
 	helpers: helpers,
-	limit: limit
+	limit: limit,
+	factory: factory
 };
 

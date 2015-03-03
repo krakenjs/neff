@@ -58,10 +58,14 @@ function getEnabledFeatures() {
 /**
  * Pass in a features object, returns the middleware
  */
-module.exports = function neff(options) {
+function neff(options) {
 	features = _.extend(features, options);
 	return helpers;
 }
 
-exports.limit = limit;
-exports.isEnabled = isEnabled;
+// add some helpers
+neff.limit = limit;
+neff.isEnabled = isEnabled;
+
+// export the thing
+module.exports = neff;

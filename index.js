@@ -1,6 +1,6 @@
 "use strict";
-var _ = require("lodash");
 
+var _ = require("lodash");
 var features = {};
 
 /**
@@ -58,7 +58,7 @@ function getEnabledFeatures() {
 /**
  * Pass in a features object, returns the middleware
  */
-exports = module.exports = function neff(options) {
+module.exports = function neff(options) {
 	features = _.extend(features, options);
 	return helpers;
 }

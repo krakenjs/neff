@@ -1,3 +1,8 @@
+Neff is simple express middleware for handling feature flags.
+
+
+#### Usage
+
 The standard way to use neff on the client & the server side is to check for enabled features using the `isEnabled()` API.
 
 ```javascript
@@ -14,10 +19,11 @@ if (moreUsers) {
 To get started with neff you'll want to make sure you call neff, passing it an an object with feature names and either `true` or `false` values. 
 
 ```
-app.use(neff({
-    "feature1": true,
-    "feature2": false
-}));
+var neff = require("neff")({
+	"feature1": true,
+	"feature2": false
+});
+app.use(neff);
 ```
 
 #### NConf-Based Config
@@ -31,11 +37,16 @@ If you'd like to utilize NConf for this, you can reference an NConf JSON file an
 }
 ```
 
+
 Then pass the config object for the features to neff:
 
 ```
-app.use(neff(nconf.get('features')));
+var neff = require("neff")(nconf.get('features'));
+app.use(neff);
 ```
+
+#### Accessing in templates
+
 
 The first thing it allows you to do is access feature flags directly in your template such as (dust syntax):
 
@@ -45,14 +56,6 @@ MY HIDDDEN CODE
 {/feature-feature1}
 
 ```
-
-It also provides a string of class names you can insert into your `<body>` (dust syntax):
-
-```html
-<body class="{featureClasses}">
-```
-
-The output prepends `feature-` to the classname, so you might see something like `<body class="feature-feature1">` with the config above. Only enabled features show up in the string.
 
 #### Express Router Limiter
 
@@ -68,6 +71,14 @@ app.get("/myhidden/route", neff.limit("feature1"), function(req, res) {
 
 ### Client Side Usage
 
+
+It also provides a string of class names you can insert into your `<body>` (dust syntax):
+
+```html
+<body class="{featureClasses}">
+```
+
+The output prepends `feature-` to the classname, so you might see something like `<body class="feature-feature1">` with the config above. Only enabled features show up in the string.
 
 Make sure your features are declared on your DOM like so:
 

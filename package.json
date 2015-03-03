@@ -1,6 +1,6 @@
 {
   "name": "neff",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "nconf & express based features flags",
   "main": "index.js",
   "scripts": {

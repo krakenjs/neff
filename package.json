@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "nconf & express based features flags",
   "main": "index.js",
+  "browser": "cjs.js",
   "scripts": {
     "test": "node test.js"
   },

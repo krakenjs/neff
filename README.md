@@ -16,7 +16,7 @@ if (moreUsers) {
 
 #### Argument-Based Config
 
-To get started with neff you'll want to make sure you call neff, passing it an an object with feature names and either `true` or `false` values. 
+To get started with neff you'll want to make sure you call neff, passing it an object with feature names and either `true` or `false` values. 
 
 ```
 var neff = require("neff")({

@@ -1,6 +1,5 @@
 "use strict";
 
-var _ = require("lodash");
 var features = {};
 
 /**
@@ -59,7 +58,7 @@ function getEnabledFeatures() {
  * Pass in a features object, returns the middleware
  */
 function neff(options) {
-	features = _.extend(features, options);
+	features = Object.assign(features, options);
 	return helpers;
 }
 
